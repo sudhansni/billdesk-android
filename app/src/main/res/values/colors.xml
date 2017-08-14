@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#1C75AF</color>
+    <color name="appBackground">#DFE4E5</color>
+    <color name="titleBlockBackground">#F2F2F2</color>
+    <color name="titleText">#1C75AF</color>
+    <color name="defaultEditTextAccent">#D0021B</color>
+    <color name="dateBox">#f6f6f6</color>
+</resources>
