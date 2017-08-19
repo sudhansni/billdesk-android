@@ -46,7 +46,7 @@
                 android:id="@+id/title_actionbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Phone Number"
+                android:text="Your Phone number"
                 android:textColor="@color/titleText"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

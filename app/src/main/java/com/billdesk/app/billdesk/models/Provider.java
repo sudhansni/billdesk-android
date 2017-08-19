@@ -1,5 +1,8 @@
 package com.billdesk.app.billdesk.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by rajesh on 7/23/2017.
  */
 
-public class Provider {
+public class Provider implements Parcelable {
     @SerializedName("iProviderId")
     @Expose
     private String iProviderId;
@@ -20,6 +23,29 @@ public class Provider {
     @SerializedName("vcWebUrl")
     @Expose
     private String vcWebUrl;
+
+    public Provider(){
+
+    }
+
+    protected Provider(Parcel in) {
+        iProviderId = in.readString();
+        vcProviderName = in.readString();
+        vcImageUrl = in.readString();
+        vcWebUrl = in.readString();
+    }
+
+    public static final Creator<Provider> CREATOR = new Creator<Provider>() {
+        @Override
+        public Provider createFromParcel(Parcel in) {
+            return new Provider(in);
+        }
+
+        @Override
+        public Provider[] newArray(int size) {
+            return new Provider[size];
+        }
+    };
 
     public String getiProviderId() {
         return iProviderId;
@@ -35,5 +61,18 @@ public class Provider {
 
     public String getVcWebUrl() {
         return vcWebUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(iProviderId);
+        dest.writeString(vcProviderName);
+        dest.writeString(vcImageUrl);
+        dest.writeString(vcWebUrl);
     }
 }
