@@ -1,6 +1,5 @@
 package com.billdesk.app.billdesk.services;
 
-import android.support.annotation.NonNull;
 import android.support.compat.BuildConfig;
 import android.util.Log;
 
@@ -9,6 +8,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -25,6 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -33,14 +34,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ServiceUtil {
-    public static final int TIMEOUT_SECONDS = 15;
+    private static final int TIMEOUT_SECONDS = 15;
     private static final String BASE_URL = "http://www.billdesk.com.au/api/";
-    private static final String PUBLIC_ONLY_IF_CACHED_MAX_STALE = "public, only-if-cached, max-stale=2419200";
     private static final String MAX_AGE_DEFAULT = "public, max-age=1";
-    private static final String MAX_AGE_PARENT_PROFILE = "public, max-age=7200";
-    private static final String APP_TYPE_VALUE = "BillDeskapp";
     private static final String CONTENT_TYPE_VALUE = "application/json";
-    private static final String DEVICE_TYPE_VALUE = "Android";
+    private static final String DEVICE_TYPE_VALUE = "android";
+    private static final String UNIQUE_ID = "125946";
     private static final OkHttpClient httpClient = createCachedClient();
     private static Retrofit.Builder builder = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create());
     private static Retrofit retrofit = builder.client(httpClient).build();
@@ -62,7 +61,9 @@ public class ServiceUtil {
             }
         };
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return new OkHttpClient.Builder().
                 readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS).
                 connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS).
                 sslSocketFactory(getDirtySocketFactory(), trustManager).
@@ -72,18 +73,9 @@ public class ServiceUtil {
                         return true;
                     }
                 }).
-                addInterceptor(getCacheInterceptor()).
-                addNetworkInterceptor(getCacheInterceptor()).
-                authenticator(new Authenticator() {
-                    @Override
-                    public Request authenticate(Route route, Response response) throws IOException {
-                        String credentials = Credentials.basic("admin", "1234");
-                        return response.request().newBuilder().header("Authorization", credentials).build();
-                    }
-                }).
+                addInterceptor(new BasicAuthInterceptor("admin", "1234")).
+                addInterceptor(interceptor).
                 build();
-
-        return okHttpClient;
     }
 
     private static SSLSocketFactory getDirtySocketFactory() {
@@ -110,36 +102,31 @@ public class ServiceUtil {
             // Create an ssl socket factory with our all-trusting manager
             return sslContext.getSocketFactory();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            Log.e("ServiceUtil","Exception while creating Socket Factory", e);
         }
         return null;
     }
 
-    @NonNull
-    private static Interceptor getCacheInterceptor() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                String cacheTime = originalRequest.url().toString().contains("parentprofile") ? MAX_AGE_PARENT_PROFILE : MAX_AGE_DEFAULT;
-                String cacheHeaderValue = cacheTime;
-                Request request = originalRequest.newBuilder().addHeader("device", DEVICE_TYPE_VALUE).
-                        addHeader("appType", APP_TYPE_VALUE).
-                        addHeader("Content-Type", CONTENT_TYPE_VALUE).
-                        addHeader("Cache-Control", cacheHeaderValue).
-                        build();
+    private static class BasicAuthInterceptor implements Interceptor {
 
-                Response response = chain.proceed(request);
+        private String credentials;
 
-                if (BuildConfig.DEBUG) {
-                    Log.d("ServiceUtil", "Caching Time" + cacheTime);
-                }
-                return response.newBuilder().removeHeader("Pragma").removeHeader("Cache-Control").header("Cache-Control", cacheHeaderValue).build();
-            }
-        };
-    }
+        private BasicAuthInterceptor(String user, String password) {
+            this.credentials = Credentials.basic(user, password);
+        }
 
-    public static OkHttpClient getHttpClient() {
-        return httpClient;
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Request authenticatedRequest = request.newBuilder()
+                    .header("Authorization", credentials)
+                    .header("source-system", "android")
+                    .header("deviceId", "125946")
+                    .removeHeader("Content-Type")
+            .build();
+            return chain.proceed(authenticatedRequest);
+        }
+
     }
 
 

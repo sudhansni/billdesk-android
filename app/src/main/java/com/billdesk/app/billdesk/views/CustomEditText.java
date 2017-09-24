@@ -2,8 +2,8 @@ package com.billdesk.app.billdesk.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +30,7 @@ public class CustomEditText extends LinearLayout {
         super(context);
     }
 
-    public CustomEditText(Context context, @Nullable AttributeSet attrs) {
+    public CustomEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.edit_text, this);
         sideBar = findViewById(R.id.sideBar);
@@ -64,7 +64,7 @@ public class CustomEditText extends LinearLayout {
 
     }
 
-    public CustomEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -102,6 +102,12 @@ public class CustomEditText extends LinearLayout {
 
     public Editable getText(){
         return editText.getText();
+    }
+
+    public void setMaxLength(int length) {
+        InputFilter[] filterArray = new InputFilter[1];
+        filterArray[0] = new InputFilter.LengthFilter(length);
+        editText.setFilters(filterArray);
     }
 
     public void setInputType(int inputType){

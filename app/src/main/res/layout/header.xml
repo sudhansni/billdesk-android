@@ -6,7 +6,7 @@
 
 <TextView android:layout_width="match_parent"
 android:layout_height="32dp"
-    android:background="@color/titleText"
+    android:background="@color/colorPrimary"
     tools:text="header"
     android:textColor="@android:color/white"
     android:textStyle="bold"

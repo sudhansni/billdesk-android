@@ -1,0 +1,40 @@
+package com.billdesk.app.billdesk.models;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by sudha on 02-09-2017.
+ */
+
+public class SendCodeResponse extends BaseResponse {
+
+    @SerializedName("userId")
+    private long userId;
+
+    @SerializedName("message")
+    private String message;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "SendCodeResponse{" +
+                "userId=" + userId +
+                ", message='" + message + '\'' +
+                "} " + super.toString();
+    }
+}
