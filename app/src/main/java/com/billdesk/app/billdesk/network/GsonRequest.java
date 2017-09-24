@@ -6,50 +6,46 @@ import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.billdesk.app.billdesk.models.BillDeskRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by sudha on 24-09-2017.
  */
 
-public class GsonGetRequest<T> extends Request<T> {
+public class GsonRequest<T> extends Request<T> {
     private final Gson gson = new Gson();
     private final Class<T> clazz;
-    private Map<String, String> headers;
     private final Response.Listener<T> listener;
+    private final BillDeskRequest request;
 
     /**
      * Make a GET request and return a parsed object from JSON.
      *
      * @param url URL of the request to make
      * @param clazz Relevant class object, for Gson's reflection
-     * @param headers Map of request headers
      */
-    public GsonGetRequest(String url, Class<T> clazz, Map<String, String> headers,
-                          Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        super(Method.GET, url, errorListener);
+    public GsonRequest(String url, int method, BillDeskRequest request, Class<T> clazz,
+                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(method, url, errorListener);
         this.clazz = clazz;
-        this.headers = headers;
         this.listener = listener;
+        this.request = request;
     }
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        if (headers == null) {
-            headers = new HashMap<>();
-        }
-        headers.put("Authorization", "Basic " + NetworkUtil.basic("admin","1234"));
-        headers.put("source-system","android");
-        headers.put("deviceId", UUID.randomUUID().toString());
-        return headers;
+      return NetworkUtil.addDefaultHeaders();
     }
 
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return NetworkUtil.getParams(request);
+    }
 
     @Override
     protected void deliverResponse(T response) {

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by sudha on 02-09-2017.
  */
 
-public class SendCodeResponse extends BaseResponse {
+public class RegisterMobileResponse extends BaseResponse {
 
     @SerializedName("userId")
     private long userId;
@@ -32,7 +32,7 @@ public class SendCodeResponse extends BaseResponse {
 
     @Override
     public String toString() {
-        return "SendCodeResponse{" +
+        return "RegisterMobileResponse{" +
                 "userId=" + userId +
                 ", message='" + message + '\'' +
                 "} " + super.toString();

@@ -2,43 +2,35 @@ package com.billdesk.app.billdesk.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
+import com.android.volley.Response;
 import com.billdesk.app.billdesk.R;
-import com.billdesk.app.billdesk.models.SendCodeRequest;
-import com.billdesk.app.billdesk.models.SendCodeResponse;
-import com.billdesk.app.billdesk.network.GsonPostRequest;
+import com.billdesk.app.billdesk.models.RegisterMobileRequest;
+import com.billdesk.app.billdesk.models.RegisterMobileResponse;
 import com.billdesk.app.billdesk.network.NetworkManager;
-import com.billdesk.app.billdesk.services.ServiceUtil;
+import com.billdesk.app.billdesk.preferences.BillDeskPreferences;
 import com.billdesk.app.billdesk.views.CustomEditText;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-/**
- * Created by jprince on 7/8/2017.
- */
-
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseActivity {
 
 
     private CustomEditText mobileNumberEditText;
     private static final int MAX_LENGTH_MOBILE_NUMBER = 9;
-    private Call<SendCodeResponse> sendCodeResponseCall;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (BillDeskPreferences.getUserId()>0) {
+           // launchCardsActivity();
+           // finish();
+        }
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,8 +47,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mobileNumberEditText = findViewById(R.id.numberInput);
         mobileNumberEditText.setMaxLength(MAX_LENGTH_MOBILE_NUMBER);
-
-
     }
 
     public void onNextButtonClicked(View view) {
@@ -64,63 +54,35 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void makeVolleyCall () {
-        com.android.volley.Response.Listener<SendCodeResponse> responseListener = new com.android.volley.Response.Listener<SendCodeResponse>() {
-            @Override
-            public void onResponse(SendCodeResponse response) {
-               System.out.println(response.toString());
-            }
-        };
+        RegisterMobileRequest registerMobileRequest = new RegisterMobileRequest();
+        registerMobileRequest.setMobileNumber(mobileNumberEditText.getText().toString());
 
-        com.android.volley.Response.ErrorListener errorListener = new com.android.volley.Response.ErrorListener() {
+        Response.Listener<RegisterMobileResponse> responseListener = new Response.Listener<RegisterMobileResponse>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-               error.printStackTrace();
-            }
-        };
-        GsonPostRequest<SendCodeResponse> request = new GsonPostRequest<>("http://www.billdesk.com.au/api/v1/sendCode",
-                SendCodeResponse.class, null, responseListener, errorListener);
-        NetworkManager.addToRequestQueue(request);
-    }
-    private void makeServiceCall () {
-        SendCodeRequest sendCodeRequest = new SendCodeRequest();
-        sendCodeRequest.setMobileNumber(mobileNumberEditText.getText().toString());
-        sendCodeResponseCall = ServiceUtil.getService().sendCode(mobileNumberEditText.getText().toString());
+            public void onResponse(RegisterMobileResponse response) {
+                if (response != null && response.isSuccess()) {
+                    // Save user id to preference
+                    BillDeskPreferences.setUserId(response.getUserId());
 
-
-        sendCodeResponseCall.enqueue(new Callback<SendCodeResponse>() {
-            @Override
-            public void onResponse(Call<SendCodeResponse> call, Response<SendCodeResponse> response) {
-                if (sendCodeResponseCall == null) {
-                    return;
-                }
-                SendCodeResponse sendCodeResponse = response.body();
-                if (sendCodeResponse == null) {
-                    // TODO:: Show Generic Error
-                    Log.d("Send Code Response :: ", "is null");
-                    return;
-                }
-                Log.d("SendCodeResponse :: ", sendCodeResponse.toString());
-                if (sendCodeResponse.isSuccess()) {
-                    // TODO:: Save UserId to Preference
+                    // Launch next activity
                     launchOtpVerifyActivity();
                 } else {
-                    // TODO:: Handle Error
-
+                    // Handle error
                 }
             }
+        };
 
-            @Override
-            public void onFailure(Call<SendCodeResponse> call, Throwable t) {
-                // TODO :: Hide Progress & Show Generic Error
-                Log.e(RegistrationActivity.class.getName(), "Exception while registering mobile number", t);
-            }
-        });
-
+        NetworkManager.registerMobile(registerMobileRequest, responseListener, errorListener);
     }
 
     private void launchOtpVerifyActivity() {
         final Intent startOtpIntent = new Intent(this, OTPActivity.class);
         startOtpIntent.putExtra(OTPActivity.NUMBER_EXTRA,  "+61" + mobileNumberEditText.getText().toString());
         startActivity(startOtpIntent);
+    }
+
+    private void launchCardsActivity() {
+        final Intent cardsIntent = new Intent(this, CardsActivity.class);
+        startActivity(cardsIntent);
     }
 }

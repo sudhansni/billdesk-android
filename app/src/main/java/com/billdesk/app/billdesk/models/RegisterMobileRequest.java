@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by sudha on 04-09-2017.
  */
 
-public class SendCodeRequest {
+public class RegisterMobileRequest implements BillDeskRequest{
 
     @SerializedName("mobileNumber")
     private String mobileNumber;
@@ -21,7 +21,7 @@ public class SendCodeRequest {
 
     @Override
     public String toString() {
-        return "SendCodeRequest{" +
+        return "RegisterMobileRequest{" +
                 "mobileNumber='" + mobileNumber + '\'' +
                 '}';
     }

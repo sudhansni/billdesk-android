@@ -6,8 +6,12 @@ import android.util.LruCache;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.billdesk.app.billdesk.models.BaseResponse;
+import com.billdesk.app.billdesk.models.BillDeskRequest;
+import com.billdesk.app.billdesk.models.RegisterMobileResponse;
 
 /**
  * Created by sudha on 23-09-2017.
@@ -44,15 +48,17 @@ public class NetworkManager {
         }
     }
 
-    public static RequestQueue getRequestQueue() {
-        return instance.requestQueue;
+
+    public static void registerMobile(BillDeskRequest request, Response.Listener<RegisterMobileResponse> responseListener, Response.ErrorListener errorListener) {
+        GsonRequest<RegisterMobileResponse> gsonRequest = new GsonRequest<>(NetworkUtil.REGISTRATION_URL, Request.Method.POST,request,
+                RegisterMobileResponse.class, responseListener, errorListener);
+        instance.requestQueue.add(gsonRequest);
     }
 
-    public static <T> void addToRequestQueue(Request<T> req) {
-        instance.requestQueue.add(req);
+    public static void verifyOtpCode(BillDeskRequest request, Response.Listener<BaseResponse> responseListener, Response.ErrorListener errorListener) {
+        GsonRequest<BaseResponse> gsonRequest = new GsonRequest<>(NetworkUtil.VERIFY_OTP_URL, Request.Method.POST,request,
+                BaseResponse.class, responseListener, errorListener);
+        instance.requestQueue.add(gsonRequest);
     }
 
-    public static ImageLoader getImageLoader() {
-        return instance.imageLoader;
-    }
 }
