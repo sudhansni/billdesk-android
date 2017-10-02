@@ -2,10 +2,6 @@ package com.billdesk.app.billdesk.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by sudha on 04-09-2017.
- */
-
 public class RegisterMobileRequest implements BillDeskRequest{
 
     @SerializedName("mobileNumber")

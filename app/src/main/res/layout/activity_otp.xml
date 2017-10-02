@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@android:color/white">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -96,6 +96,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
+
+            app:cursorVisible="true"
+            app:pinLength="4"
             app:inputType="number"
             app:pinBackground="@drawable/rounded_square"
             app:pinHeight="50dp"

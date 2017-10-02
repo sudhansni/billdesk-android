@@ -15,6 +15,7 @@ import com.billdesk.app.billdesk.models.RegisterMobileRequest;
 import com.billdesk.app.billdesk.models.RegisterMobileResponse;
 import com.billdesk.app.billdesk.network.NetworkManager;
 import com.billdesk.app.billdesk.preferences.BillDeskPreferences;
+import com.billdesk.app.billdesk.utils.UiUtils;
 import com.billdesk.app.billdesk.views.CustomEditText;
 
 
@@ -27,8 +28,12 @@ public class RegistrationActivity extends BaseActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (BillDeskPreferences.getUserId()>0) {
-           // launchCardsActivity();
+        if (BillDeskPreferences.isUserValidated()) {
+            if (BillDeskPreferences.hasUserSeenProfileScreen()) {
+                // launchCardsActivity();
+            } else {
+                //launchProfileActivity();
+            }
            // finish();
         }
         setContentView(R.layout.activity_registration);
@@ -50,7 +55,9 @@ public class RegistrationActivity extends BaseActivity {
     }
 
     public void onNextButtonClicked(View view) {
-       makeVolleyCall();
+        BillDeskPreferences.setMobileNumber(UiUtils.AUSTRALIA_COUNTRY_CODE + mobileNumberEditText.getText().toString());
+        makeVolleyCall();
+
     }
 
     private void makeVolleyCall () {
@@ -77,12 +84,17 @@ public class RegistrationActivity extends BaseActivity {
 
     private void launchOtpVerifyActivity() {
         final Intent startOtpIntent = new Intent(this, OTPActivity.class);
-        startOtpIntent.putExtra(OTPActivity.NUMBER_EXTRA,  "+61" + mobileNumberEditText.getText().toString());
         startActivity(startOtpIntent);
     }
 
     private void launchCardsActivity() {
         final Intent cardsIntent = new Intent(this, CardsActivity.class);
         startActivity(cardsIntent);
+    }
+
+    private void launchProfileActivity() {
+        final Intent profileActivityIntent = new Intent(this, ProfileDetailsActivity.class);
+        profileActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(profileActivityIntent);
     }
 }

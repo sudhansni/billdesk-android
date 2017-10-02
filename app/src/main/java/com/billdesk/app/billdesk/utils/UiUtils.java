@@ -5,6 +5,10 @@ import android.net.ConnectivityManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
+
 import java.util.Random;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -14,6 +18,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  */
 
 public class UiUtils {
+    public static final String AUSTRALIA_COUNTRY_CODE = "+61";
     private static int accentColors[] = {
             android.R.color.holo_blue_light,
             android.R.color.holo_green_dark,
@@ -42,6 +47,18 @@ public class UiUtils {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
 
+    }
+
+    public static String getFormattedPhoneNumber(String phoneNumber) {
+        try {
+
+            PhoneNumberUtil pnu = PhoneNumberUtil.getInstance();
+            Phonenumber.PhoneNumber pn = pnu.parse(phoneNumber, "AU");
+            return pnu.format(pn, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL);
+
+        } catch (NumberParseException e) {
+            return phoneNumber;
+        }
     }
 
 }

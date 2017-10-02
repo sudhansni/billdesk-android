@@ -11,49 +11,24 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@android:color/white">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/arrow_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="#000000FF"
-                android:src="@drawable/ic_arrow_left"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/arrow_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="8dp"
-                android:background="#000000FF"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="0dp"
-                android:visibility="invisible"/>
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="19dp">
 
             <TextView
                 android:id="@+id/title_actionbar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Create Account"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/arrow_right"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:gravity="center"
+                />
 
 
         </android.support.constraint.ConstraintLayout>
@@ -99,11 +74,11 @@
             android:layout_marginTop="32dp"
             app:hint="Your Full Name"
             app:label="Name"
-            android:inputType="text"
+            android:inputType="textPersonName"
             app:sidebarColor="@color/defaultEditTextAccent" />
 
         <com.billdesk.app.billdesk.views.CustomEditText
-            android:id="@+id/numberInput"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="24dp"
@@ -112,7 +87,7 @@
             android:layout_marginTop="16dp"
             app:hint="Your Email Address"
             app:label="Email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             app:sidebarColor="#9013FE" />
 
         <Button
@@ -126,7 +101,7 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:id="@+id/btutton_create_account"/>
+            android:id="@+id/button_create_account"/>
 
     </LinearLayout>
 

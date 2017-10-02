@@ -10,17 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by sudha on 24-09-2017.
- */
-
-public class NetworkUtil {
+class NetworkUtil {
 
     private static final String BASIC_AUTH_USERNAME = "admin";
     private static final String BASIC_AUTH_PASSWORD = "1234";
-    public static final String BASE_URL = "http://www.billdesk.com.au/api/v1/";
-    public static final String REGISTRATION_URL = BASE_URL + "sendCode";
-    public static final String VERIFY_OTP_URL = BASE_URL + "validateCode";
+    private static final String BASE_URL = "http://www.billdesk.com.au/api/v1/";
+    static final String REGISTRATION_URL = BASE_URL + "sendCode";
+    static final String VERIFY_OTP_URL = BASE_URL + "validateCode";
+    static final String UPDATE_PROFILE_URL = BASE_URL + "updateProfile";
     private static final Gson gson = new Gson();
     private static HashMap<String, String> headers = null;
 
@@ -28,7 +25,7 @@ public class NetworkUtil {
 
     }
 
-    public static Map<String, String> addDefaultHeaders() {
+    static Map<String, String> addDefaultHeaders() {
         if (headers == null) {
             headers = new HashMap<>();
             String credentials = BASIC_AUTH_USERNAME + ":" + BASIC_AUTH_PASSWORD;
@@ -39,7 +36,7 @@ public class NetworkUtil {
         return headers;
     }
 
-    public static Map<String, String> getParams(BillDeskRequest request) {
+    static Map<String, String> getParams(BillDeskRequest request) {
         if (request != null) {
             return gson.fromJson(gson.toJson(request), new TypeToken<HashMap<String, String>>() {
             }.getType());

@@ -18,16 +18,18 @@
 
         <activity android:name=".activities.RegistrationActivity"
             android:screenOrientation="portrait">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
-        </intent-filter>
+
         </activity>
 
         <activity android:name=".activities.OTPActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.ProfileDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.CardsActivity"
             android:screenOrientation="portrait">
             <!-- Enables google to index the app and provides deep linking -->

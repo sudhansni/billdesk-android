@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.billdesk.app.billdesk.models.BaseResponse;
 import com.billdesk.app.billdesk.models.BillDeskRequest;
 import com.billdesk.app.billdesk.models.RegisterMobileResponse;
+import com.billdesk.app.billdesk.models.UserProfileResponse;
 
 /**
  * Created by sudha on 23-09-2017.
@@ -58,6 +59,12 @@ public class NetworkManager {
     public static void verifyOtpCode(BillDeskRequest request, Response.Listener<BaseResponse> responseListener, Response.ErrorListener errorListener) {
         GsonRequest<BaseResponse> gsonRequest = new GsonRequest<>(NetworkUtil.VERIFY_OTP_URL, Request.Method.POST,request,
                 BaseResponse.class, responseListener, errorListener);
+        instance.requestQueue.add(gsonRequest);
+    }
+
+    public static void updateProfileDetails(BillDeskRequest request, Response.Listener<UserProfileResponse> responseListener, Response.ErrorListener errorListener) {
+        GsonRequest<UserProfileResponse> gsonRequest = new GsonRequest<>(NetworkUtil.UPDATE_PROFILE_URL, Request.Method.POST, request,
+                UserProfileResponse.class, responseListener, errorListener);
         instance.requestQueue.add(gsonRequest);
     }
 
