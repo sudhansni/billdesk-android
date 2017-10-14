@@ -10,7 +10,7 @@
         android:fromAlpha="0"
         android:toAlpha="1"/>
 
-    <sweet:com.billdesk.app.billdesk.utils
+    <sweet:com.billdesk.app.billdesk.utils.Rotate3dAnimation
         android:duration="400"
         sweet:fromDeg="100"
         sweet:pivotX="50%"

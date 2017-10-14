@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/success_circle"/>
 
-        <com.innoit.smartparent.views.SuccessTickView
+        <com.billdesk.app.billdesk.views.SuccessTickView
             android:id="@+id/success_tick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

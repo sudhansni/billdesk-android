@@ -100,6 +100,10 @@ public class CustomEditText extends LinearLayout {
         editText.setText(text);
     }
 
+    public void setError(String text) {
+        editText.setError(text);
+    }
+
     public Editable getText(){
         return editText.getText();
     }

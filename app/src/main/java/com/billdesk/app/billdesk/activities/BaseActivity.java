@@ -51,6 +51,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                hideProgress();
+                showGenericError();
                 error.printStackTrace();
             }
         };

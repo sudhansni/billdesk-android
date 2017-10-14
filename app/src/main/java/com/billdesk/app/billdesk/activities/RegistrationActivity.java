@@ -60,21 +60,48 @@ public class RegistrationActivity extends BaseActivity {
 
     }
 
+    private boolean validateInputs() {
+        boolean result = true;
+        final String mobile = mobileNumberEditText.getText().toString();
+        if (mobile.isEmpty()) {
+            mobileNumberEditText.requestFocus();
+            mobileNumberEditText.setError(mobileNumberEditText.getContext().getString(R.string.error_desc_mobile_required));
+            return false;
+        }
+
+        if (mobile.length() != MAX_LENGTH_MOBILE_NUMBER) {
+            result = false;
+        }
+        mobileNumberEditText.requestFocus();
+        mobileNumberEditText.setError(result ? null : mobileNumberEditText.getContext().getString(R.string.error_desc_invalid_mobile));
+        return result;
+    }
+
     private void makeVolleyCall () {
+        UiUtils.hideSoftKeyboard(mobileNumberEditText);
+        if (!(validateInputs() && isNetworkConnected())) {
+            return;
+        }
+
+        showProgress();
+
         RegisterMobileRequest registerMobileRequest = new RegisterMobileRequest();
         registerMobileRequest.setMobileNumber(mobileNumberEditText.getText().toString());
 
         Response.Listener<RegisterMobileResponse> responseListener = new Response.Listener<RegisterMobileResponse>() {
             @Override
             public void onResponse(RegisterMobileResponse response) {
-                if (response != null && response.isSuccess()) {
+                hideProgress();
+                if (response == null) {
+                    showGenericError();
+                } else if (response.isSuccess()) {
                     // Save user id to preference
                     BillDeskPreferences.setUserId(response.getUserId());
 
                     // Launch next activity
                     launchOtpVerifyActivity();
                 } else {
-                    // Handle error
+                    showGenericError();
                 }
             }
         };
