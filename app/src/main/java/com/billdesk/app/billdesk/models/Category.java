@@ -8,10 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by rajesh on 7/19/2017.
- */
-
 public class Category implements Parcelable{
     @SerializedName("categoryName")
     @Expose

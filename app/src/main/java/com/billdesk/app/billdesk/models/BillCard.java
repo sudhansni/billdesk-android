@@ -4,9 +4,6 @@ import android.support.annotation.ColorRes;
 
 import java.util.Date;
 
-/**
- * Created by rajesh on 7/23/2017.
- */
 
 public class BillCard {
 

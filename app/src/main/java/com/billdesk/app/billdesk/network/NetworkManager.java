@@ -14,9 +14,6 @@ import com.billdesk.app.billdesk.models.BillDeskRequest;
 import com.billdesk.app.billdesk.models.RegisterMobileResponse;
 import com.billdesk.app.billdesk.models.UserProfileResponse;
 
-/**
- * Created by sudha on 23-09-2017.
- */
 
 public class NetworkManager {
     private static NetworkManager instance;

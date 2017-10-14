@@ -2,10 +2,6 @@ package com.billdesk.app.billdesk.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by sudha on 02-10-2017.
- */
-
 public class PersonalDetails {
 
     @SerializedName("userId")

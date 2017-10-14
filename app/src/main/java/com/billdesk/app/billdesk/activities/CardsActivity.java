@@ -11,9 +11,6 @@ import com.billdesk.app.billdesk.R;
 import com.billdesk.app.billdesk.fragments.CardsListFragment;
 import com.billdesk.app.billdesk.interfaces.FragmentChangeListener;
 
-/**
- * Created by rajesh on 7/23/2017.
- */
 
 public class CardsActivity extends AppCompatActivity implements FragmentChangeListener{
 

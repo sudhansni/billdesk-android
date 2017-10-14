@@ -4,10 +4,6 @@ import com.billdesk.app.billdesk.services.ServiceUtil;
 
 import java.io.IOException;
 
-/**
- * Created by sudha on 23-09-2017.
- */
-
 public class TestApplication {
 
     public static void main(String args[]) {

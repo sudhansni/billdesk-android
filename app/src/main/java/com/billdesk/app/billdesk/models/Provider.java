@@ -6,10 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by rajesh on 7/23/2017.
- */
-
 public class Provider implements Parcelable {
     @SerializedName("iProviderId")
     @Expose

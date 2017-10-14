@@ -16,16 +16,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.billdesk.app.billdesk.R;
-import com.billdesk.app.billdesk.utils.UiUtils;
 import com.billdesk.app.billdesk.interfaces.OnCategorySelectedListener;
 import com.billdesk.app.billdesk.models.Category;
+import com.billdesk.app.billdesk.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by rajesh on 8/5/2017.
- */
 
 public class CardCategoryFragment extends Fragment implements AdapterView.OnItemClickListener{
 

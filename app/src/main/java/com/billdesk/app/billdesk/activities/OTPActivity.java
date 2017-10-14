@@ -18,9 +18,6 @@ import com.billdesk.app.billdesk.preferences.BillDeskPreferences;
 import com.billdesk.app.billdesk.utils.UiUtils;
 import com.goodiebag.pinview.Pinview;
 
-/**
- * Created by msd on 7/9/2017.
- */
 
 public class OTPActivity extends BaseActivity {
 

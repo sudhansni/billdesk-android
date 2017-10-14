@@ -13,10 +13,6 @@ import java.util.Random;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-/**
- * Created by rajesh on 7/27/2017.
- */
-
 public class UiUtils {
     public static final String AUSTRALIA_COUNTRY_CODE = "+61";
     private static int accentColors[] = {

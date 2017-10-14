@@ -25,10 +25,6 @@ import java.util.Locale;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-/**
- * Created by rajesh on 7/27/2017.
- */
-
 public class CardsListFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override

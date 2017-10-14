@@ -3,9 +3,6 @@ package com.billdesk.app.billdesk.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by sudha on 24-09-2017.
- */
 
 public class BillDeskPreferences {
     private static final String PREFERENCE_NAME = "BILLDESK";
