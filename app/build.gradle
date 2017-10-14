@@ -40,4 +40,5 @@ dependencies {
     compile 'com.android.support:support-v4:26.1.0'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'com.pnikosis:materialish-progress:1.0'
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="radius_button_corners">12dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+
+    <!-- Alert Dialog -->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
+    <dimen name="padding_exp_listview">24dp</dimen>
+    <dimen name="max_photo_height_stories">200dp</dimen>
+
+    <integer name="anim_duration_long">500</integer>
+    <integer name="anim_duration_medium">300</integer>
+</resources>
