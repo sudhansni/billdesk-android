@@ -86,7 +86,7 @@ public class RegistrationActivity extends BaseActivity {
         showProgress();
 
         RegisterMobileRequest registerMobileRequest = new RegisterMobileRequest();
-        registerMobileRequest.setMobileNumber(mobileNumberEditText.getText().toString());
+        registerMobileRequest.setMobileNumber(UiUtils.AUSTRALIA_COUNTRY_CODE + mobileNumberEditText.getText().toString());
 
         Response.Listener<RegisterMobileResponse> responseListener = new Response.Listener<RegisterMobileResponse>() {
             @Override

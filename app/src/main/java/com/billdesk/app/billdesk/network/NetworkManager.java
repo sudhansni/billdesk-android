@@ -2,6 +2,7 @@ package com.billdesk.app.billdesk.network;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.LruCache;
 
 import com.android.volley.Request;
@@ -50,19 +51,24 @@ public class NetworkManager {
     public static void registerMobile(BillDeskRequest request, Response.Listener<RegisterMobileResponse> responseListener, Response.ErrorListener errorListener) {
         GsonRequest<RegisterMobileResponse> gsonRequest = new GsonRequest<>(NetworkUtil.REGISTRATION_URL, Request.Method.POST,request,
                 RegisterMobileResponse.class, responseListener, errorListener);
-        instance.requestQueue.add(gsonRequest);
+        queueRequest(gsonRequest);
     }
 
     public static void verifyOtpCode(BillDeskRequest request, Response.Listener<BaseResponse> responseListener, Response.ErrorListener errorListener) {
         GsonRequest<BaseResponse> gsonRequest = new GsonRequest<>(NetworkUtil.VERIFY_OTP_URL, Request.Method.POST,request,
                 BaseResponse.class, responseListener, errorListener);
-        instance.requestQueue.add(gsonRequest);
+        queueRequest(gsonRequest);
     }
 
     public static void updateProfileDetails(BillDeskRequest request, Response.Listener<UserProfileResponse> responseListener, Response.ErrorListener errorListener) {
         GsonRequest<UserProfileResponse> gsonRequest = new GsonRequest<>(NetworkUtil.UPDATE_PROFILE_URL, Request.Method.POST, request,
                 UserProfileResponse.class, responseListener, errorListener);
-        instance.requestQueue.add(gsonRequest);
+        queueRequest(gsonRequest);
+    }
+
+    private static void queueRequest(GsonRequest<? extends BaseResponse> request) {
+        Log.d("NetworkManager", "Volley Request :: " + request.toString());
+        instance.requestQueue.add(request);
     }
 
 }
