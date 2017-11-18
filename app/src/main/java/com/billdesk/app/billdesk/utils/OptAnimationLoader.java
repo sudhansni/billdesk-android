@@ -28,13 +28,11 @@ public class OptAnimationLoader {
             return createAnimationFromXml(context, parser);
         } catch (XmlPullParserException ex) {
             Resources.NotFoundException rnf = new Resources.NotFoundException("Can't load animation resource ID #0x" +
-                    Integer.toHexString(id));
-            rnf.initCause(ex);
+                    Integer.toHexString(id), ex);
             throw rnf;
         } catch (IOException ex) {
             Resources.NotFoundException rnf = new Resources.NotFoundException("Can't load animation resource ID #0x" +
-                    Integer.toHexString(id));
-            rnf.initCause(ex);
+                    Integer.toHexString(id), ex);
             throw rnf;
         } finally {
             if (parser != null) parser.close();

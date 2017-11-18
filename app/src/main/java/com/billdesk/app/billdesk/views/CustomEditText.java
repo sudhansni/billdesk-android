@@ -34,8 +34,8 @@ public class CustomEditText extends LinearLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.edit_text, this);
         sideBar = findViewById(R.id.sideBar);
-        labelView = (TextView) findViewById(R.id.field_label);
-        editText = (EditText) findViewById(R.id.text_input);
+        labelView = findViewById(R.id.field_label);
+        editText = findViewById(R.id.text_input);
         init(attrs);
     }
 

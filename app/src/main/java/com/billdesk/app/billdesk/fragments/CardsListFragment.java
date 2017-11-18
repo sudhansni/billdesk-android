@@ -8,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.billdesk.app.billdesk.R;
-import com.billdesk.app.billdesk.interfaces.FragmentChangeListener;
+import com.billdesk.app.billdesk.interfaces.PaymentStatus;
 import com.billdesk.app.billdesk.models.BillCard;
 import com.billdesk.app.billdesk.models.Provider;
 
@@ -25,7 +24,7 @@ import java.util.Locale;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class CardsListFragment extends Fragment implements View.OnClickListener {
+public class CardsListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -35,23 +34,9 @@ public class CardsListFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        StickyListHeadersListView stickyList = (StickyListHeadersListView) view.findViewById(R.id.card_list);
+        StickyListHeadersListView stickyList = view.findViewById(R.id.card_list);
         MyAdapter adapter = new MyAdapter();
         stickyList.setAdapter(adapter);
-        ImageView settings = (ImageView) view.findViewById(R.id.settings_shortcut);
-        settings.setOnClickListener(this);
-        ImageView addcard = (ImageView) view.findViewById(R.id.create_card_shortcut);
-        addcard.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.create_card_shortcut:
-                FragmentChangeListener listener = (FragmentChangeListener)getActivity();
-                listener.replaceFragment(new CreateCardFragment());
-        }
-
     }
 
     public class MyAdapter extends BaseAdapter implements StickyListHeadersAdapter {
@@ -61,15 +46,15 @@ public class CardsListFragment extends Fragment implements View.OnClickListener 
         Date july = Date.valueOf("2017-7-11");
         Date august = Date.valueOf("2017-8-11");
         BillCard[] cards = {
-                new BillCard(june, provider, BillCard.PaymentStatus.PAID, 200, android.R.color.holo_red_light),
-                new BillCard(june, provider, BillCard.PaymentStatus.OVERDUE, 300, android.R.color.holo_blue_light),
-                new BillCard(june, provider, BillCard.PaymentStatus.PENDING, 200, android.R.color.holo_purple),
-                new BillCard(july, provider, BillCard.PaymentStatus.PAID, 500, android.R.color.holo_orange_light),
-                new BillCard(july, provider, BillCard.PaymentStatus.OVERDUE, 200, android.R.color.holo_green_dark),
-                new BillCard(july, provider, BillCard.PaymentStatus.PENDING, 493.21f, android.R.color.holo_red_light),
-                new BillCard(august, provider, BillCard.PaymentStatus.PAID, 451, android.R.color.holo_blue_light),
-                new BillCard(august, provider, BillCard.PaymentStatus.OVERDUE, 452.29f, android.R.color.holo_red_light),
-                new BillCard(august, provider, BillCard.PaymentStatus.PENDING, 200, android.R.color.holo_purple),
+                new BillCard(june, provider, PaymentStatus.PAID, 200, android.R.color.holo_red_light),
+                new BillCard(june, provider, PaymentStatus.OVERDUE, 300, android.R.color.holo_blue_light),
+                new BillCard(june, provider, PaymentStatus.PENDING, 200, android.R.color.holo_purple),
+                new BillCard(july, provider, PaymentStatus.PAID, 500, android.R.color.holo_orange_light),
+                new BillCard(july, provider, PaymentStatus.OVERDUE, 200, android.R.color.holo_green_dark),
+                new BillCard(july, provider, PaymentStatus.PENDING, 493.21f, android.R.color.holo_red_light),
+                new BillCard(august, provider, PaymentStatus.PAID, 451, android.R.color.holo_blue_light),
+                new BillCard(august, provider, PaymentStatus.OVERDUE, 452.29f, android.R.color.holo_red_light),
+                new BillCard(august, provider, PaymentStatus.PENDING, 200, android.R.color.holo_purple),
         };
 
         private String[] countries;
@@ -103,11 +88,11 @@ public class CardsListFragment extends Fragment implements View.OnClickListener 
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = inflater.inflate(R.layout.bill_card, parent, false);
-                holder.date = (TextView) convertView.findViewById(R.id.date);
-                holder.month = (TextView) convertView.findViewById(R.id.month);
-                holder.amount = (TextView) convertView.findViewById(R.id.amount);
-                holder.title = (TextView) convertView.findViewById(R.id.title_and_image);
-                holder.status = (TextView) convertView.findViewById(R.id.status);
+                holder.date = convertView.findViewById(R.id.date);
+                holder.month = convertView.findViewById(R.id.month);
+                holder.amount = convertView.findViewById(R.id.amount);
+                holder.title = convertView.findViewById(R.id.title_and_image);
+                holder.status = convertView.findViewById(R.id.status);
                 holder.accentBar = convertView.findViewById(R.id.accent_bar);
                 convertView.setTag(holder);
             } else {
@@ -141,7 +126,7 @@ public class CardsListFragment extends Fragment implements View.OnClickListener 
             if (convertView == null) {
                 holder = new HeaderViewHolder();
                 convertView = inflater.inflate(R.layout.header, parent, false);
-                holder.text = (TextView) convertView.findViewById(R.id.header);
+                holder.text = convertView.findViewById(R.id.header);
                 convertView.setTag(holder);
             } else {
                 holder = (HeaderViewHolder) convertView.getTag();

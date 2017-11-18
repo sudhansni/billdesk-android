@@ -62,7 +62,10 @@ public class OTPActivity extends BaseActivity {
         Response.Listener<BaseResponse> responseListener = new Response.Listener<BaseResponse>() {
             @Override
             public void onResponse(BaseResponse response) {
-                if (response != null && response.isSuccess()) {
+                if (response == null) {
+                    showGenericError();
+                }
+                else if (response.isSuccess()) {
 
                     // Save to preference
                     BillDeskPreferences.setUserValidated();
@@ -72,7 +75,7 @@ public class OTPActivity extends BaseActivity {
                 } else {
                     // Handle error
                     Log.d("OTPActivity", "Response :: " + response);
-                    launchProfileActivity(); //TODO:: Remove this after testing
+                    launchProfileActivity(); //TODO:: Remove this after testing and show error message
                 }
             }
         };

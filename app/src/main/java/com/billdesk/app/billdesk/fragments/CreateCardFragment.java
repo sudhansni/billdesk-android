@@ -60,9 +60,9 @@ public class CreateCardFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        ImageView settings = (ImageView) view.findViewById(R.id.settings_shortcut);
+        ImageView settings = view.findViewById(R.id.settings_shortcut);
         settings.setOnClickListener(this);
-        ImageView showCards = (ImageView) view.findViewById(R.id.card_view_shortcut);
+        ImageView showCards = view.findViewById(R.id.card_view_shortcut);
         showCards.setOnClickListener(this);
     }
 

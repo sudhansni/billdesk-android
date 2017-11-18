@@ -45,7 +45,7 @@ public class CardCategoryFragment extends Fragment implements AdapterView.OnItem
             category = new ArrayList<>();
         }
 
-        listView = (ListView) view.findViewById(R.id.list_view_categories);
+        listView = view.findViewById(R.id.list_view_categories);
         listView.setOnItemClickListener(this);
         listView.setAdapter(new CategoryAdapter(getActivity(), R.layout.category_list_item, category));
 
@@ -98,7 +98,7 @@ public class CardCategoryFragment extends Fragment implements AdapterView.OnItem
 
             View view = convertView.findViewById(R.id.sideBar);
             view.setBackgroundResource(UiUtils.getRandomAccentColor());
-            TextView textView = (TextView) convertView.findViewById(R.id.item);
+            TextView textView = convertView.findViewById(R.id.item);
             textView.setText(data.get(position).getCategoryName());
             return convertView;
         }

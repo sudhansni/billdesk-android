@@ -2,6 +2,8 @@ package com.billdesk.app.billdesk.models;
 
 import android.support.annotation.ColorRes;
 
+import com.billdesk.app.billdesk.interfaces.PaymentStatus;
+
 import java.util.Date;
 
 
@@ -13,12 +15,6 @@ public class BillCard {
     private  float amount;
     private int colorId;
 
-    public enum PaymentStatus {
-        PAID,
-        PENDING,
-        OVERDUE;
-
-    }
     public BillCard(Date dueDate, Provider provider, PaymentStatus status, float amount, @ColorRes int colorId){
         this.dueDate = dueDate;
         this.provider = provider;

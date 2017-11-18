@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import com.billdesk.app.billdesk.views.CustomEditText;
 public class ProfileDetailsActivity extends BaseActivity {
 
     private CustomEditText mobileNumberEditText;
+    private CustomEditText fullNameEditText;
+    private CustomEditText emailEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,11 +33,19 @@ public class ProfileDetailsActivity extends BaseActivity {
         TextView textView = findViewById(R.id.numberView);
         textView.setText(BillDeskPreferences.getMobileNumber());
 
+        fullNameEditText = findViewById((R.id.nameInput));
+        fullNameEditText.setText(BillDeskPreferences.getUserFullName());
+
+        emailEditText = findViewById((R.id.emailInput));
+        emailEditText.setText(BillDeskPreferences.getUserEmail());
+
         Button createAccountButton = findViewById(R.id.button_create_account);
 
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO:: If no change in data, skip network call
+                // TODO:: If data has changed, Validate inputs
                 updateUserProfile();
             }
         });
@@ -50,13 +61,16 @@ public class ProfileDetailsActivity extends BaseActivity {
     private void updateUserProfile () {
         UserProfileRequest userProfileRequest = new UserProfileRequest();
         userProfileRequest.setUserId(BillDeskPreferences.getUserId());
-        userProfileRequest.setEmailAddress("");
-        userProfileRequest.setFullName("");
+        userProfileRequest.setEmailAddress(emailEditText.getText().toString());
+        userProfileRequest.setFullName(fullNameEditText.getText().toString());
 
         Response.Listener<UserProfileResponse> responseListener = new Response.Listener<UserProfileResponse>() {
             @Override
             public void onResponse(UserProfileResponse response) {
-                if (response != null && response.isSuccess()) {
+                if (response == null) {
+                    showGenericError();
+                }
+                 else if (response.isSuccess()) {
 
                     // Save email & full name to preference
                     BillDeskPreferences.setEmail(response.getPersonalDetails().getEmailAddress());
@@ -66,6 +80,8 @@ public class ProfileDetailsActivity extends BaseActivity {
                     launchCategoryActivity();
                 } else {
                     // Handle error
+                    Log.d("ProfileDetails", "Response :: " + response);
+                    showGenericError();
                 }
             }
         };
