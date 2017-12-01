@@ -47,7 +47,7 @@ public class CreateCardFragment extends Fragment implements View.OnClickListener
                     FragmentTransaction transaction = manager.beginTransaction();
                     Fragment fragment = new CardCategoryFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("new", config.getCategories());
+                   // bundle.putParcelableArrayList("new", config.getCategories());
                     fragment.setArguments(bundle);
                     transaction.add(R.id.create_card_placeholder, fragment);
                     transaction.commit();
@@ -81,7 +81,7 @@ public class CreateCardFragment extends Fragment implements View.OnClickListener
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new CardCategoryFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("new", config.getCategories());
+      //  bundle.putParcelableArrayList("new", config.getCategories());
         fragment.setArguments(bundle);
         transaction.add(R.id.create_card_placeholder, fragment);
         transaction.commit();

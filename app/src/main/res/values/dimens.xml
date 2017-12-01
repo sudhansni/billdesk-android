@@ -3,6 +3,8 @@
 
     <dimen name="radius_button_corners">12dp</dimen>
     <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_mini">4dp</dimen>
 
     <!-- Alert Dialog -->
     <dimen name="alert_width">290dp</dimen>
@@ -13,4 +15,12 @@
 
     <integer name="anim_duration_long">500</integer>
     <integer name="anim_duration_medium">300</integer>
+
+    <!-- Text Size -->
+    <dimen name="text_size_extra_large">22sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_mini">8sp</dimen>
+
 </resources>

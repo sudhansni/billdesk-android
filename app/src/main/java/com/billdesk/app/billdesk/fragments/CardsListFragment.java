@@ -60,7 +60,7 @@ public class CardsListFragment extends Fragment {
         private String[] countries;
         private LayoutInflater inflater;
 
-        public MyAdapter() {
+        MyAdapter() {
             inflater = getActivity().getLayoutInflater();
         }
 
@@ -88,11 +88,10 @@ public class CardsListFragment extends Fragment {
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = inflater.inflate(R.layout.bill_card, parent, false);
-                holder.date = convertView.findViewById(R.id.date);
-                holder.month = convertView.findViewById(R.id.month);
-                holder.amount = convertView.findViewById(R.id.amount);
-                holder.title = convertView.findViewById(R.id.title_and_image);
-                holder.status = convertView.findViewById(R.id.status);
+                holder.date = convertView.findViewById(R.id.textview_card_due_value);
+                holder.amount = convertView.findViewById(R.id.textview_card_amount_value);
+                holder.title = convertView.findViewById(R.id.textview_card_title);
+                holder.status = convertView.findViewById(R.id.textview_card_status_value);
                 holder.accentBar = convertView.findViewById(R.id.accent_bar);
                 convertView.setTag(holder);
             } else {
@@ -103,15 +102,10 @@ public class CardsListFragment extends Fragment {
             int extracted_date = calendar.get(Calendar.DAY_OF_MONTH);
 
             holder.date.setText(String.valueOf(extracted_date));
-            holder.date.setTextColor(ContextCompat.getColor(getActivity(), card.getColorId()));
-
-            SimpleDateFormat month_date = new SimpleDateFormat("MMMM", Locale.ENGLISH);
-            holder.month.setText(month_date.format(calendar.getTime()));
-            holder.month.setTextColor(ContextCompat.getColor(getActivity(), card.getColorId()));
 
             NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
             holder.amount.setText(String.valueOf(formatter.format(cards[position].getAmount())));
-            holder.title.setText("placeholder");
+            holder.title.setText("Telstra Corporation");
             holder.status.setText(cards[position].getStatus().toString());
             holder.status.setTextColor(ContextCompat.getColor(getActivity(), card.getColorId()));
 
@@ -157,7 +151,6 @@ public class CardsListFragment extends Fragment {
 
         class ViewHolder {
             TextView date;
-            TextView month;
             TextView amount;
             TextView title;
             TextView status;

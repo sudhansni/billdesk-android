@@ -40,7 +40,7 @@ public class CardCategoryFragment extends Fragment implements AdapterView.OnItem
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        category =  getArguments().getParcelableArrayList("new");
+       // category =  getArguments().getParcelableArrayList("new");
         if (category == null) {
             category = new ArrayList<>();
         }
