@@ -1,146 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_gravity="top"
     android:layout_width="match_parent"
-    android:minHeight="150dp"
+    android:layout_height="@dimen/view_card_min_height"
+    android:layout_gravity="top"
     card_view:cardBackgroundColor="@color/cardview_light_background"
-    android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <View android:layout_width="5dp"
-            android:layout_height="match_parent"
+        <View
             android:id="@+id/accent_bar"
-            android:layout_alignParentStart="true"
-            />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Telstra Corporation"
-        android:layout_toEndOf="@id/accent_bar"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:background="@color/appBackground"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/textview_card_title"
-        android:padding="@dimen/padding_small"
-        android:textSize="@dimen/text_size_medium"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Mobile Bill"
-        android:layout_toEndOf="@id/accent_bar"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@id/textview_card_title"
-        android:id="@+id/textview_card_category"
-        android:padding="@dimen/padding_small"
-        android:textSize="@dimen/text_size_medium"
-        />
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textview_card_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Due On"
             android:layout_toEndOf="@id/accent_bar"
-            android:singleLine="true"
+            android:background="@color/provider_background"
             android:ellipsize="marquee"
-            android:textColor="@color/sub_title_color"
-            android:layout_below="@id/textview_card_category"
-            android:id="@+id/textview_card_due_title"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            android:textSize="@dimen/text_size_mini"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="27-June-2017"
+            android:padding="@dimen/padding_small"
             android:singleLine="true"
-            android:ellipsize="marquee"
-            android:layout_toEndOf="@id/accent_bar"
             android:textColor="@color/colorPrimary"
-            android:layout_below="@id/textview_card_due_title"
-            android:id="@+id/textview_card_due_value"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            android:textStyle="bold"
             android:textSize="@dimen/text_size_medium"
-            />
+            tools:text="Telstra Corporation" />
+
 
         <TextView
+            android:id="@+id/textview_card_due_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Amount"
-            android:singleLine="true"
+            android:layout_below="@id/textview_card_title"
+            android:layout_toEndOf="@id/accent_bar"
             android:ellipsize="marquee"
-            android:textColor="@color/sub_title_color"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/textview_card_category"
-            android:id="@+id/textview_card_amount_title"
-            android:paddingStart="@dimen/padding_small"
             android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:singleLine="true"
+            android:textColor="@color/sub_title_color"
             android:textSize="@dimen/text_size_mini"
-            />
+            android:text="Due On" />
 
         <TextView
+            android:id="@+id/textview_card_due_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="$300"
-            android:singleLine="true"
+            android:layout_below="@id/textview_card_due_title"
+            android:layout_toEndOf="@id/accent_bar"
             android:ellipsize="marquee"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:singleLine="true"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
+            tools:text="27-June-2017" />
+
+        <TextView
+            android:id="@+id/textview_card_amount_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textview_card_title"
+            android:ellipsize="marquee"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:singleLine="true"
+            android:textColor="@color/sub_title_color"
+            android:textSize="@dimen/text_size_mini"
+            android:text="Amount" />
+
+        <TextView
+            android:id="@+id/textview_card_amount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/textview_card_amount_title"
-            android:id="@+id/textview_card_amount_value"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_medium"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Status"
-            android:singleLine="true"
-            android:layout_toEndOf="@id/accent_bar"
             android:ellipsize="marquee"
-            android:textColor="@color/sub_title_color"
-            android:layout_below="@id/textview_card_due_value"
-            android:id="@+id/textview_card_status_title"
-            android:paddingTop="@dimen/padding_small"
-            android:paddingStart="@dimen/padding_small"
             android:paddingEnd="@dimen/padding_small"
-            android:textSize="@dimen/text_size_mini"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Over Due"
+            android:paddingStart="@dimen/padding_small"
             android:singleLine="true"
-            android:layout_toEndOf="@id/accent_bar"
-            android:ellipsize="marquee"
             android:textColor="@color/colorPrimary"
-            android:layout_below="@id/textview_card_status_title"
-            android:id="@+id/textview_card_status_value"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            android:textStyle="bold"
             android:textSize="@dimen/text_size_medium"
-            />
+            android:textStyle="bold"
+            tools:text="$300" />
+
+        <TextView
+            android:id="@+id/textview_card_status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_card_due_value"
+            android:layout_toEndOf="@id/accent_bar"
+            android:ellipsize="marquee"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"
+            android:singleLine="true"
+            android:textColor="@color/sub_title_color"
+            android:textSize="@dimen/text_size_mini"
+            android:text="Status" />
+
+        <TextView
+            android:id="@+id/textview_card_status_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_card_status_title"
+            android:layout_toEndOf="@id/accent_bar"
+            android:ellipsize="marquee"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingStart="@dimen/padding_small"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
+            tools:text="Over Due" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -71,7 +71,7 @@ public class CreateCardFragment extends Fragment implements View.OnClickListener
         switch (v.getId()){
             case R.id.card_view_shortcut:
                 FragmentChangeListener listener = (FragmentChangeListener) getActivity();
-                listener.replaceFragment(new CardsListFragment());
+            //    listener.replaceFragment(new CardsListFragment());
         }
     }
 

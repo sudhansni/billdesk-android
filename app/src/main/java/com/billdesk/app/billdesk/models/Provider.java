@@ -16,6 +16,14 @@ public class Provider {
     @SerializedName("vcWebUrl")
     private String vcWebUrl;
 
+    public Provider() {
+
+    }
+
+    public Provider(String name) {
+        vcProviderName = name;
+    }
+
     public String getiProviderId() {
         return iProviderId;
     }

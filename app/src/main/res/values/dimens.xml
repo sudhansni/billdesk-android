@@ -21,6 +21,7 @@
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_mini">8sp</dimen>
+    <dimen name="text_size_mini">10sp</dimen>
+    <dimen name="view_card_min_height">120dp</dimen>
 
 </resources>

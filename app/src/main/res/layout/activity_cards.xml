@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/fragment_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#DFE4E5"
-    android:id="@+id/fragment_root">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -25,9 +25,9 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
                 android:background="#000000FF"
-                android:src="@drawable/ic_add_circle"
-                android:onClick="onAddButtonClicked"
                 android:contentDescription="Add New Card"
+                android:onClick="onAddButtonClicked"
+                android:src="@drawable/ic_action_add_card"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,5 +49,15 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.Toolbar>
+
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/card_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_small"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/padding_small"
+        android:cacheColorHint="@android:color/transparent" />
 
 </LinearLayout>

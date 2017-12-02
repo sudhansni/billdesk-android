@@ -10,6 +10,7 @@
 
     <!-- Bill Cards -->
     <color name="sub_title_color">#B6B6B6</color>
+    <color name="provider_background">#F5F2F1</color>
 
     <!-- Sweet Alert Dialog -->
     <color name="float_transparent">#00000000</color>
