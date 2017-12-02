@@ -44,7 +44,7 @@
             android:paddingStart="@dimen/padding_small"
             android:singleLine="true"
             android:textColor="@color/sub_title_color"
-            android:textSize="@dimen/text_size_mini"
+            android:textSize="@dimen/text_size_small"
             android:text="Due On" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:paddingStart="@dimen/padding_small"
             android:singleLine="true"
             android:textColor="@color/sub_title_color"
-            android:textSize="@dimen/text_size_mini"
+            android:textSize="@dimen/text_size_small"
             android:text="Amount" />
 
         <TextView
@@ -103,7 +103,7 @@
             android:paddingTop="@dimen/padding_small"
             android:singleLine="true"
             android:textColor="@color/sub_title_color"
-            android:textSize="@dimen/text_size_mini"
+            android:textSize="@dimen/text_size_small"
             android:text="Status" />
 
         <TextView

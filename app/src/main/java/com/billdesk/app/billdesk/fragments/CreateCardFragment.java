@@ -8,11 +8,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.billdesk.app.billdesk.R;
-import com.billdesk.app.billdesk.interfaces.FragmentChangeListener;
 import com.billdesk.app.billdesk.interfaces.OnCategorySelectedListener;
 import com.billdesk.app.billdesk.models.GetConfigResponse;
 import com.billdesk.app.billdesk.services.BillDeskClient;
@@ -60,19 +58,11 @@ public class CreateCardFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        ImageView settings = view.findViewById(R.id.settings_shortcut);
-        settings.setOnClickListener(this);
-        ImageView showCards = view.findViewById(R.id.card_view_shortcut);
-        showCards.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.card_view_shortcut:
-                FragmentChangeListener listener = (FragmentChangeListener) getActivity();
-            //    listener.replaceFragment(new CardsListFragment());
-        }
+
     }
 
     @Override

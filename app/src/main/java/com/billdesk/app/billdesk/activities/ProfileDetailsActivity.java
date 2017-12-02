@@ -90,7 +90,7 @@ public class ProfileDetailsActivity extends BaseActivity {
     }
 
     private void launchCategoryActivity() {
-        final Intent categoryIntent = new Intent(this, CardsActivity.class);
+        final Intent categoryIntent = new Intent(this, ViewCardsActivity.class);
         categoryIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(categoryIntent);
     }

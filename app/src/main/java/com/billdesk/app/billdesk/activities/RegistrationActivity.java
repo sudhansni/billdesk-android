@@ -115,7 +115,7 @@ public class RegistrationActivity extends BaseActivity {
     }
 
     private void launchCardsActivity() {
-        final Intent cardsIntent = new Intent(this, CardsActivity.class);
+        final Intent cardsIntent = new Intent(this, ViewCardsActivity.class);
         startActivity(cardsIntent);
     }
 

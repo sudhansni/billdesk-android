@@ -8,4 +8,5 @@
     <string name="error_desc_no_internet">No Network Connection</string>
     <string name="generic_error_title">Something went wrong</string>
     <string name="generic_error_desc">Sorry, We are facing technical difficulties currently. Please try again later</string>
+    <string name="msg_view_cards_empty">You do not have any saved cards</string>
 </resources>

@@ -50,14 +50,32 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-        android:id="@+id/card_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/padding_small"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/padding_small"
-        android:cacheColorHint="@android:color/transparent" />
+        android:layout_height="match_parent">
+
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/card_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/padding_small"
+            android:visibility="gone"
+            android:padding="@dimen/padding_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/empty_textview"
+            android:padding="@dimen/padding_default"
+            android:text="@string/msg_view_cards_empty"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+    </FrameLayout>
 
 </LinearLayout>

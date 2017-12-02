@@ -1,7 +1,5 @@
 package com.billdesk.app.billdesk.models;
 
-import android.support.annotation.ColorRes;
-
 import com.billdesk.app.billdesk.interfaces.PaymentStatus;
 
 import java.util.Date;
@@ -15,12 +13,11 @@ public class BillCard {
     private  float amount;
     private int colorId;
 
-    public BillCard(Date dueDate, Provider provider, PaymentStatus status, float amount, @ColorRes int colorId){
+    public BillCard(Date dueDate, Provider provider, PaymentStatus status, float amount){
         this.dueDate = dueDate;
         this.provider = provider;
         this.status = status;
         this.amount = amount;
-        this.colorId = colorId;
     }
     public Date getDueDate() {
         return dueDate;
@@ -38,8 +35,5 @@ public class BillCard {
         return amount;
     }
 
-    public int getColorId() {
-        return colorId;
-    }
 }
 
