@@ -1,18 +1,21 @@
 package com.billdesk.app.billdesk.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.billdesk.app.billdesk.R;
@@ -23,16 +26,24 @@ import com.billdesk.app.billdesk.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO:: This class need further modification
+public class SelectCategoryFragment extends Fragment implements AdapterView.OnItemClickListener{
 
-public class CardCategoryFragment extends Fragment implements AdapterView.OnItemClickListener{
-
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private AppCompatTextView emptyView;
     private List<Category> category;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.category_list_fragment, null);
+        View view = inflater.inflate(R.layout.recycler_with_emptyview, null);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        emptyView = view.findViewById(R.id.emptyView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        return view;
 
     }
 
@@ -44,11 +55,6 @@ public class CardCategoryFragment extends Fragment implements AdapterView.OnItem
         if (category == null) {
             category = new ArrayList<>();
         }
-
-        listView = view.findViewById(R.id.list_view_categories);
-        listView.setOnItemClickListener(this);
-        listView.setAdapter(new CategoryAdapter(getActivity(), R.layout.category_list_item, category));
-
 
     }
 
